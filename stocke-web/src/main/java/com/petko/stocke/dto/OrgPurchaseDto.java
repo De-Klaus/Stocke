@@ -1,11 +1,11 @@
-package com.petko.stocke.dao;
+package com.petko.stocke.dto;
 
-public class OrgPurchase {
+public class OrgPurchaseDto {
     private Long   orgId;
     private String orgName;
     private boolean show;
 
-    public OrgPurchase(Long orgId, String orgName, boolean show) {
+    public OrgPurchaseDto(Long orgId, String orgName, boolean show) {
         this.orgId = orgId;
         this.orgName = orgName;
         this.show = show;

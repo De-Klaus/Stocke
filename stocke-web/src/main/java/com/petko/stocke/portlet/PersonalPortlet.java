@@ -1,17 +1,15 @@
 package com.petko.stocke.portlet;
 
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.util.*;
-import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
-import org.osgi.service.component.annotations.Component;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.petko.stocke.constants.Keys.API;
 import com.petko.stocke.constants.WebKeys;
 import com.petko.stocke.pool.RecordPersonalPool;
 import com.petko.stocke.service.SaveFileService;
 import com.petko.stocke.util.PdfUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.osgi.service.component.annotations.Component;
 
 import javax.portlet.*;
 import java.io.IOException;
@@ -52,11 +50,18 @@ public class PersonalPortlet extends MVCPortlet {
     public void serveResource(ResourceRequest request, ResourceResponse response)
             throws IOException, PortletException {
         log.info("Start Resource Persona ......." );
+        String resourceID = request.getResourceID();
+        log.info("Resource id=" + resourceID);
+        switch (resourceID) {
+            case "download":
+                downloadPersonalQr(request,response);
+                break;
+            default:
+                log.error("Can't find metod");
+                break;
+        }
         super.serveResource(request, response);
     }
-
-
-
 
 
     /**
@@ -64,28 +69,20 @@ public class PersonalPortlet extends MVCPortlet {
      * @param request
      * @param response
      */
-    public void downloadPersonalQr(ActionRequest request, ActionResponse response) throws IOException, InterruptedException {
+    public void downloadPersonalQr(ResourceRequest request, ResourceResponse response) {
         log.info("Downloading personal");
 
-        long humanId = ParamUtil.getLong(request,"humanId");
+        long humanId = ParamUtil.getLong(request, API.HUMAN_ID);
         log.info(String.valueOf(humanId));
 
         RecordPersonalPool params = new RecordPersonalPool(humanId);
         log.info("downloadPersonalQr");
 
-        // TODO формирование файла
+        // TODO file generation
         byte[] pdfQrBytes = PdfUtil.createPdfPersonal(params.getCreateParams());
 
-        // TODO сохранение файла
-        JSONObject jsonObject =SaveFileService.collectPdfQrDoc(params.getSaveFileParams(),pdfQrBytes);
-
-        // TODO запускаем скачивание файла
-        if(jsonObject.has("url")){
-            String url = jsonObject.getString("url");
-            response.sendRedirect(url);
-        }
-
-
+        // TODO file saving
+        SaveFileService.collectPdfQrDoc(request,response,params.getSaveFileParams(),pdfQrBytes);
     }
 
 

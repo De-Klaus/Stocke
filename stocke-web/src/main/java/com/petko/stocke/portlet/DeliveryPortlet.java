@@ -2,16 +2,14 @@ package com.petko.stocke.portlet;
 
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.osgi.service.component.annotations.Component;
 import com.petko.stocke.constants.WebKeys;
-import com.petko.stocke.util.CamundaUtil;
-import com.petko.stocke.util.ProduceCoalUtil;
+import com.petko.stocke.service.HumanApplicationService;
+import com.petko.stocke.util.ProduceProductUtil;
 
 import javax.portlet.*;
 import java.io.IOException;
@@ -68,23 +66,21 @@ public class DeliveryPortlet extends MVCPortlet {
     }
 
     /**
-     * <p> Выдача угольной продукции.
-     * Номер aprove заявления передаём в redirect. </p>
+     * <p> Issuance of products </p>
      *
      * @param request
      * @param response
      */
-    public void produceCoal(ActionRequest request, ActionResponse response) throws PortalException {
+    public void produceProduct(ActionRequest request, ActionResponse response) throws PortalException {
         String addLimit = ParamUtil.getString(request, WebKeys.Delivery.Request.ADD_LIMIT);
-        String remaining_limit = ParamUtil.getString(request, WebKeys.Delivery.Request.REMAINING_LIMIT);
         String recipientId = ParamUtil.getString(request, WebKeys.Delivery.Request.ID);
         String storekeeperId = ParamUtil.getString(request, WebKeys.Delivery.Request.STOREKEEPER_ID);
         String orgId = ParamUtil.getString(request, WebKeys.Delivery.Request.ORG_ID);
         String userId = ParamUtil.getString(request, WebKeys.Delivery.Request.USER_ID);
         String gradesItem = ParamUtil.getString(request, WebKeys.Delivery.Request.GRADES);
 
-        // Передача данных на выдачу угля физику
-        long aprove = CamundaUtil.approve(Map.of(
+        // Data transfer for issuance
+        long aprove = HumanApplicationService.approve(Map.of(
                 "recipientId",recipientId,
                 "addLimit",addLimit,
                 "storekeeperId",storekeeperId,
@@ -93,19 +89,19 @@ public class DeliveryPortlet extends MVCPortlet {
                 "gradesItem",gradesItem
                 ));
 
-        // Передача данных на фиксацию выданного угля со склада
-        ProduceCoalUtil.prodeceCaolGrades(Long.parseLong(orgId),
+        // Data transfer to fix the issue of products from the warehouse
+        ProduceProductUtil.prodeceProductGrades(Long.parseLong(orgId),
                 Long.parseLong(gradesItem),
                 BigDecimal.valueOf(Double.parseDouble(addLimit)));
 
-        // передача параметров и redirect
+        // redirect
         MutableRenderParameters parameters = response.getRenderParameters();
         parameters.setValue(WebKeys.Delivery.APROVE, aprove+"");
         parameters.setValue("mvcPath", "/jsp/delivery/statement.jsp");
     }
 
     /**
-     * <p> Поиск заявителя в БД. Поиск осуществляется по СНИЛС и ФИО с датой рождения </p>
+     * <p> Applicant Search </p>
      *
      * @param request
      * @param response
@@ -117,26 +113,22 @@ public class DeliveryPortlet extends MVCPortlet {
         String firstname = errorSerch(request,ParamUtil.getString(request, WebKeys.Delivery.Request.FIRSTNAME_S),"firstname");
         String middlename = errorSerch(request,ParamUtil.getString(request, WebKeys.Delivery.Request.MIDDLENAME_S),"middlename");
         String birthdate = errorSerch(request,ParamUtil.getString(request, WebKeys.Delivery.Request.BIRTHDATE_S),"birthdate");
-        log.info("birthdate "+ birthdate+"snils "+snils+"lastname "+lastname+"firstname "+firstname+"middlename "+middlename);
-        log.info("SessionErrors "+ SessionErrors.isEmpty(request));
 
         if(snils!=null&&!snils.trim().isEmpty()){
-            humanId=CamundaUtil.findIdBySnils(snils);
-            log.info("snils_humanId: "+humanId);
+            humanId= HumanApplicationService.findIdBySnils(snils);
         }
         if(humanId==0||(humanId+"").equals("9223372036854775807")){
-            humanId=CamundaUtil.findByFIOandBirthDay(lastname,firstname,middlename,birthdate);
-            log.info("FIO_humanId: "+humanId);
+            humanId= HumanApplicationService.findByFioAndBirthDay(lastname,firstname,middlename,birthdate);
         }
         if(humanId!=0)
-            SessionErrors.clear(request); // оситка ссесии при успешно поиске
+            SessionErrors.clear(request);
 
         MutableRenderParameters parameters = response.getRenderParameters();
         parameters.setValue(WebKeys.Delivery.HUMAN_ID, humanId+"");
     }
 
     /**
-     * <p> Проверка послей из формы на наличие ошибок и запись их в ссесию </p>
+     * <p>Checking fields from the form for errors and writing them to the session </p>
      *
      * @param request
      * @param stringRequest - значени поля типа String

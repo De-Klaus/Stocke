@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StringUtil {
 
     /**
-     * Проверка на наличие только цифр в строке и точки
+     * Checking for the presence of only numbers in a string and a dot
      * @param input
      * @return
      */
@@ -37,7 +37,7 @@ public class StringUtil {
 
 
     /**
-     * Проверка входного значения на число и возвращения числа
+     * Testing an input value for a number and returning a number
      * @param input
      * @return
      */
@@ -48,7 +48,7 @@ public class StringUtil {
     }
 
     /**
-     * Проверка на наличие только цифр в строке
+     * Checking if there are only digits in a string
      * @param input
      * @return
      */
@@ -68,5 +68,16 @@ public class StringUtil {
             return true;
         }
     }
+
+    /**
+     * Removing spaces from a string
+     * @param input
+     * @return
+     */
+    public static String removeSpaces(String input) {
+        return input.replace("-","").replaceAll("\\s+","");
+    }
+
+
 
 }

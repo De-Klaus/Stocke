@@ -3,13 +3,12 @@ package com.petko.stocke.util;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @Slf4j
-public class DataUtil {
+public class DateUtil {
     /**
-     * Прибавляем 24 часа, чтобы был включительно весь день указанной даты
+     * Add 24 hours so that the whole day of the specified date is inclusive
      * @param date
      * @return
      */
@@ -21,14 +20,13 @@ public class DataUtil {
     }
 
     /**
-     * Проверка условия попадания заявки в диапазон конкурса
+     * Checking the conditions for an application to fall into the tender range
      * @param start
      * @param end
      * @param appDate
      * @return
      */
     public static boolean calculateDateRange(Date start, Date end, Date appDate){
-
         Date endDate = addEndDayTime(end);
 
         long difAppStart = appDate.getTime() - start.getTime();
@@ -38,5 +36,18 @@ public class DataUtil {
             return true;
 
         return false;
+    }
+
+    /**
+     * Getting the date before T
+     * @param date
+     * @return
+     */
+    public static Optional<String> getSplitDate(String date){
+        if(date.contains("T")) {
+            List<String> dateList = Arrays.asList(date.split("T"));
+            return dateList.stream().findFirst();
+        }
+        return Optional.empty();
     }
 }

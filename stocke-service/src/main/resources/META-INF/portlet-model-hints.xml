@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.petko.stocke.model.CaseApplication">
+		<field name="id" type="long" />
+		<field name="AdditionalFields" type="String" />
+		<field name="Status" type="String" />
+		<field name="CaseModelId" type="Long" />
+		<field name="OwnerId" type="long" />
+		<field name="Active" type="boolean" />
+		<field name="Archive" type="boolean" />
+		<field name="Hidden" type="boolean" />
+		<field name="Type" type="long" />
+		<field name="StartDate" type="Date" />
+		<field name="EndDate" type="Date" />
+	</model>
+	<model name="com.petko.stocke.model.StatusModel">
+		<field name="id" type="long" />
+		<field name="CaseModelId" type="long" />
+		<field name="Status" type="String" />
+		<field name="Internal" type="boolean" />
+		<field name="Message" type="String" />
+		<field name="Notification" type="boolean" />
+		<field name="NotificationCount" type="long" />
+		<field name="NotificationType" type="boolean" />
+	</model>
+</model-hints>

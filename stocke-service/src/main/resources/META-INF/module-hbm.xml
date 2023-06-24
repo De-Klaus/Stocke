@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="com.petko.stocke.model.CaseApplication" />
+	<import class="com.petko.stocke.model.StatusModel" />
+	<class name="com.petko.stocke.model.impl.CaseApplicationImpl" table="stocke_CaseApplication">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="id_" name="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="AdditionalFields" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="CaseModelId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="OwnerId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Archive" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Hidden" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Type" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="StartDate" type="org.hibernate.type.TimestampType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="EndDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.petko.stocke.model.impl.StatusModelImpl" table="stocke_StatusModel">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="id_" name="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="CaseModelId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Internal" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Message" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="Notification" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="NotificationCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="NotificationType" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+</hibernate-mapping>

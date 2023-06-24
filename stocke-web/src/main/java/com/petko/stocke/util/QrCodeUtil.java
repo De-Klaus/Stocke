@@ -27,6 +27,13 @@ public class QrCodeUtil {
     private static final String UTF_8_CHARSET = "UTF-8";
 
 
+    /**
+     * Code qr generation
+     * @param input
+     * @param width
+     * @param height
+     * @return
+     */
     public static BufferedImage toQrCode(final String input,
                                          final int width,
                                          final int height) {
@@ -42,6 +49,13 @@ public class QrCodeUtil {
         }
     }
 
+    /**
+     * Code qr generation
+     * @param input
+     * @param width
+     * @param height
+     * @return
+     */
     public static String toBase64QrCode(final String input,
                                         final int width,
                                         final int height) {
@@ -56,16 +70,16 @@ public class QrCodeUtil {
     }
 
     /***
-     * Получить QR код для вывода в представлении
-     * @param input данные для предачи чере qr код
+     * Get QR code to display in view
+     * @param input
      */
     public static String toBase64QrCode(final String input) {
         return toBase64QrCode(input, DEFAULT_QR_CODE_WIDTH, DEFAULT_QR_CODE_HEIGHT);
     }
 
     /***
-     * Получить QR для записи в файл
-     * @param input данные для предачи чере qr код
+     * Get a QR to write to a file
+     * @param input
      */
     public static BufferedImage toQrCodes(final String input) {
         return toQrCode(input, DEFAULT_QR_CODE_WIDTH, DEFAULT_QR_CODE_HEIGHT);

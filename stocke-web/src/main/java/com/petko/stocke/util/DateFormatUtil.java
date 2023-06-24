@@ -21,10 +21,10 @@ import java.util.Optional;
 public class DateFormatUtil {
 
     /**
-     * @return дату в заданном формате
+     *  Return the date in the given format
      *
-     *  @param date   - Дата
-     *  @param format   - Формат
+     *  @param date
+     *  @param format
      */
     public static String getFormDate(Date date, String format) {
         DateFormat df = new SimpleDateFormat(format);
@@ -32,10 +32,10 @@ public class DateFormatUtil {
     }
 
     /**
-     * @return String дату в заданном формате
+     * Return the date in the given format
      *
-     *  @param dateIn   - Строка даты
-     *  @param format   - Формат
+     *  @param dateIn
+     *  @param format
      */
     public static String parseDate(String dateIn, String format) {
         if(dateIn.contains("T"))
@@ -47,25 +47,9 @@ public class DateFormatUtil {
         return outDate;
     }
 
-    /**
-     * @return Date включающую время даты 23:59:59
-     *
-     *  @param inDate   - дата
-     */
-    public static Date setTimeEnd(Date inDate) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(inDate);
-        cal.set(Calendar.HOUR_OF_DAY,23);
-        cal.set(Calendar.MINUTE,59);
-        cal.set(Calendar.SECOND,59);
-        cal.set(Calendar.MILLISECOND,59);
-        Date newTimeDate = cal.getTime();
-        return newTimeDate;
-    }
-
 
     /**
-     * Распарсить дату из строки в указанный формат
+     * Return the date in the given format
      * @param stringDate
      * @return
      */
@@ -79,31 +63,4 @@ public class DateFormatUtil {
         return Optional.empty();
     }
 
-    /**
-     * @return формат "дд.мм.гггг"
-     */
-    public static DateFormat dmy() {
-        return new SimpleDateFormat("dd.MM.yyyy");
-    }
-
-    /**
-     * @return формат "гггг-мм-дд"
-     */
-    public static DateFormat ymd() {
-        return new SimpleDateFormat("yyyy-MM-dd");
-    }
-
-    /**
-     * @return формат "гггг" (только год)
-     */
-    public static DateFormat yyyy() {
-        return new SimpleDateFormat("yyyy");
-    }
-
-    /**
-     * @return формат "гггг-мм-дд чч:мм:сс" (только год)
-     */
-    public static DateFormat ymdT() {
-        return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
-    }
 }

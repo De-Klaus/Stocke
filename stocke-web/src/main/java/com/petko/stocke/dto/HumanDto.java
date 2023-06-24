@@ -1,6 +1,6 @@
-package com.petko.stocke.dao;
+package com.petko.stocke.dto;
 
-public class Human {
+public class HumanDto {
 
     private long id;
     private String lastname;
@@ -130,7 +130,7 @@ public class Human {
         this.remainder = remainder;
     }
 
-    public Human(long id, String lastname, String firstname, String middlename, String birthdate, String snils, String town, String street, String house, String flat, double square, double coefficient, int storeys, double remainder) {
+    public HumanDto(long id, String lastname, String firstname, String middlename, String birthdate, String snils, String town, String street, String house, String flat, double square, double coefficient, int storeys, double remainder) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;

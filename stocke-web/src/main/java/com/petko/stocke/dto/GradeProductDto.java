@@ -1,15 +1,15 @@
-package com.petko.stocke.dao;
+package com.petko.stocke.dto;
 
-public class GradeCoal {
+public class GradeProductDto {
     Long value;
     String label;
-    Long idOrgBP;
+    Long idOrgCP;
     Double remainderGradeCoal;
 
-    public GradeCoal(Long value, String label, Long idOrgBP, Double remainderGradeCoal) {
+    public GradeProductDto(Long value, String label, Long idOrgCP, Double remainderGradeCoal) {
         this.value = value;
         this.label = label;
-        this.idOrgBP = idOrgBP;
+        this.idOrgCP = idOrgCP;
         this.remainderGradeCoal = remainderGradeCoal;
     }
 
@@ -29,12 +29,12 @@ public class GradeCoal {
         this.label = label;
     }
 
-    public Long getIdOrgBP() {
-        return idOrgBP;
+    public Long getIdOrgCP() {
+        return idOrgCP;
     }
 
-    public void setIdOrgBP(Long idOrgBP) {
-        this.idOrgBP = idOrgBP;
+    public void setIdOrgCP(Long idOrgCP) {
+        this.idOrgCP = idOrgCP;
     }
 
     public Double getRemainderGradeCoal() {

@@ -14,10 +14,6 @@ import javax.portlet.RenderResponse;
 import java.io.IOException;
 
 
-/**
- * @author Bereznyuk
- *
- */
 @Component(
         immediate = true,
         property = {

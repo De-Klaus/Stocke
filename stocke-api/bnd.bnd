@@ -1,0 +1,9 @@
+Bundle-Name: stocke-api
+Bundle-SymbolicName: ru.isands.dou.api
+Bundle-Version: 1.0.0
+Export-Package: \
+	com.petko.stocke.model,\
+	com.petko.stocke.service,\
+	com.petko.stocke.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../stocke-service/service.xml

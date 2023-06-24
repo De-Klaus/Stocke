@@ -37,11 +37,10 @@ public class PdfUtil {
     private static final int PERSONAL_QR_CODE_HEIGHT = 190;
     private static final int HEADER_TEXT_SIZE        = 14;
     private static final int TEXT_SIZE               = 12;
-    // для того чтобы указанный путь работал, нужно скопировать папку src\main\resources\fonts в каталог liferay
     private static final String FONT_PATH = "/opt/liferay/fonts/arial.ttf";
 
     /**
-     * Создание PDF документа с заданными параметрами
+     * Creating a PDF document with specified parameters
      * @param pdfParams
      * @throws Exception
      */
@@ -128,7 +127,7 @@ public class PdfUtil {
 
 
     /**
-     * Создание PDF документа с Qr кодом с персональной страницы
+     * Create a PDF document with a QR code from a personal page
      * @param fileParams
      * @throws Exception
      */
@@ -198,7 +197,7 @@ public class PdfUtil {
     }
 
     /**
-     * Создание заголовка и присвоение ему стилей
+     * Create a header and style it
      * @param title
      * @param font
      * @return
@@ -215,27 +214,27 @@ public class PdfUtil {
     }
 
     /**
-     * Добавление стилей строке
+     * Adding Line Styles
      * @param font
      * @return
      */
     private static Cell setStyleCell(PdfFont font) {
-        Cell listCell1_1 = new Cell(); // Creating a cell
-        listCell1_1.setFont(font);
-        listCell1_1.setFontSize(TEXT_SIZE);
-        listCell1_1.setTextAlignment(TextAlignment.LEFT);
-        return listCell1_1;
+        Cell listCell = new Cell();
+        listCell.setFont(font);
+        listCell.setFontSize(TEXT_SIZE);
+        listCell.setTextAlignment(TextAlignment.LEFT);
+        return listCell;
     }
 
     /**
-     * Установка текста для строки с установлеными стилями
+     * Setting text for a row with styles set
      * @param text
-     * @param listCell1_1
+     * @param listCell
      */
-    private static void setListItem(String text, Cell listCell1_1) {
-        ListItem item1_1 = new ListItem(text);
-        item1_1.setMarginTop(10);
-        listCell1_1.add(item1_1);
+    private static void setListItem(String text, Cell listCell) {
+        ListItem item = new ListItem(text);
+        item.setMarginTop(10);
+        listCell.add(item);
     }
 
 }
