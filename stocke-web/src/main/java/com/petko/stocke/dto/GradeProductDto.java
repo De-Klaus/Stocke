@@ -4,13 +4,13 @@ public class GradeProductDto {
     Long value;
     String label;
     Long idOrgCP;
-    Double remainderGradeCoal;
+    Double remainderGrade;
 
-    public GradeProductDto(Long value, String label, Long idOrgCP, Double remainderGradeCoal) {
+    public GradeProductDto(Long value, String label, Long idOrgCP, Double remainderGrade) {
         this.value = value;
         this.label = label;
         this.idOrgCP = idOrgCP;
-        this.remainderGradeCoal = remainderGradeCoal;
+        this.remainderGrade = remainderGrade;
     }
 
     public Long getValue() {
@@ -37,11 +37,11 @@ public class GradeProductDto {
         this.idOrgCP = idOrgCP;
     }
 
-    public Double getRemainderGradeCoal() {
-        return remainderGradeCoal;
+    public Double getRemainderGrade() {
+        return remainderGrade;
     }
 
-    public void setRemainderGradeCoal(Double remainderGradeCoal) {
-        this.remainderGradeCoal = remainderGradeCoal;
+    public void setRemainderGrade(Double remainderGrade) {
+        this.remainderGrade = remainderGrade;
     }
 }

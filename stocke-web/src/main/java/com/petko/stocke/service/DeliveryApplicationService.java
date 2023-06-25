@@ -20,7 +20,7 @@ public class DeliveryApplicationService {
         List<CaseApplication> apList = new ArrayList<>();
         addApplicationStock(apList);
         log.debug("addApplicationStock: "+apList.size());
-        addApplicationStockAndCoalCut(apList);
+        addApplicationStockAndProductCut(apList);
         log.debug("getDeliveryApplications: "+apList.size());
         return apList;
     }
@@ -40,7 +40,7 @@ public class DeliveryApplicationService {
      * Receipt of applications for the issuance of products by Case
      * @param storageApplications
      */
-    private static void addApplicationStockAndCoalCut(List<CaseApplication> storageApplications) {
+    private static void addApplicationStockAndProductCut(List<CaseApplication> storageApplications) {
         List<CaseApplication> applications = ApplicationService.getApplications(CP.CP_PRODUCT_DELIVERY, STATUS.PRODUCTS_DELIVERED);
         log.debug("ApplicationsCut: " + applications.size());
         if(!applications.isEmpty()&&applications.size()>0)

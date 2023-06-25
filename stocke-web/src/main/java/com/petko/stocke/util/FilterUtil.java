@@ -49,16 +49,16 @@ public class FilterUtil {
             JSONObject dataForm = new JSONObject(dataJSON);
             AtomicBoolean result = new AtomicBoolean(false);
             storages.forEach(storage ->{
-                if (dataForm.has(Keys.API.COAL_STORAGE_NAME)) {
-                    String coalstorage_name = dataForm.optString(Keys.API.COAL_STORAGE_NAME);
-                    String orgId = getOrgId(coalstorage_name);
-                    if(!Validator.isBlank(coalstorage_name)&&storage.equals(orgId))
+                if (dataForm.has(Keys.API.STORAGE_NAME)) {
+                    String storage_name = dataForm.optString(Keys.API.STORAGE_NAME);
+                    String orgId = getOrgId(storage_name);
+                    if(!Validator.isBlank(storage_name)&&storage.equals(orgId))
                         result.set(true);
                 }
                 if(dataForm.has(Keys.API.ORG)) {
-                    String coalstorage_name = dataForm.optString(Keys.API.ORG);
-                    String orgId = getOrgId(coalstorage_name);
-                    if (!Validator.isBlank(coalstorage_name) && storage.equals(orgId))
+                    String storage_name = dataForm.optString(Keys.API.ORG);
+                    String orgId = getOrgId(storage_name);
+                    if (!Validator.isBlank(storage_name) && storage.equals(orgId))
                         result.set(true);
                 }
             });

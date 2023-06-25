@@ -47,19 +47,19 @@ public class CalculateUtil {
     }
 
     /**
-     * Calculation of the limit of coal production and conversion to BigDecimal
+     * Calculation of the limit production and conversion to BigDecimal
      * @param humanEntity
      * @return
      */
     public static BigDecimal getLimitDecimal(HumanDto humanEntity){
         BigDecimal square = BigDecimal.valueOf(humanEntity.getSquare()!=0?humanEntity.getSquare():1);
         BigDecimal coefficient = BigDecimal.valueOf(humanEntity.getCoefficient()!=0?humanEntity.getCoefficient():1);
-        // Calculation of the allocated limit of coal production
-        return square.multiply(coefficient).setScale(3, RoundingMode.HALF_UP);// Выделенный лимит угольной продукции
+        // Calculation of the allocated limit production
+        return square.multiply(coefficient).setScale(3, RoundingMode.HALF_UP);// Выделенный лимит продукции
     }
 
     /**
-     * Obtaining the balance of coal products and converting to BigDecimal
+     * Obtaining the balance products and converting to BigDecimal
      * @param humanEntity
      * @return
      */
@@ -68,10 +68,10 @@ public class CalculateUtil {
     }
 
     /**
-     * Summarizes the amount of coal issued on applications
+     * Summarizes the amount issued on applications
      *
      * @param filters
-     * @return Amount of issued coal (in tons)
+     * @return Amount of issued (in tons)
      */
     public static String getAmount(Map<String, Object> filters) {
         // filter data

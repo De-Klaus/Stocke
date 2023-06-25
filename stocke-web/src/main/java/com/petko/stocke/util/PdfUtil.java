@@ -62,7 +62,7 @@ public class PdfUtil {
         // Creating a Document
         Document document = new Document(pdf);
 
-        Text headText = new Text("QR-код для получения угольной продукции");
+        Text headText = new Text("QR-код для получения продукции");
         headText.setBold();
         headText.setFont(font);
         headText.setFontSize(HEADER_TEXT_SIZE);

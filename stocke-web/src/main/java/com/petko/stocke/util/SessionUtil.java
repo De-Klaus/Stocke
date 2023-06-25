@@ -27,7 +27,7 @@ public class SessionUtil {
             try {
                 org = OrganizationLocalServiceUtil.getOrganization(orgId);
             } catch (PortalException e) {
-                log.error("Ошибка получения организации выдачи угольной продукции ", e);
+                log.error("Ошибка получения организации выдачи продукции ", e);
                 e.printStackTrace();
             }
         }

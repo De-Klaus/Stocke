@@ -219,7 +219,7 @@ public class HumanApplicationService {
 
 
     /**
-     * Creation of an application for the issuance of coal products
+     * Creation of an application for the issuance products
      * @param request
      * @param storekeeperId
      * @param dataForm
@@ -232,9 +232,9 @@ public class HumanApplicationService {
         dataForm.put(API.STOREKEEPER_LASTNAME,      storekeeper.getLastName().trim());
         dataForm.put(API.STOREKEEPER_FIRSTNAME,     storekeeper.getFirstName().trim());
         dataForm.put(API.STOREKEEPER_MIDDLENAME,    storekeeper.getMiddleName().trim());
-        Organization coalstorage = OrganizationLocalServiceUtil.getOrganization(orgId);
-        dataForm.put(API.COALSTORAGE_ID,            coalstorage.getOrganizationId());
-        dataForm.put(API.COALSTORAGE_NAME,          coalstorage.getName().trim());
+        Organization storage = OrganizationLocalServiceUtil.getOrganization(orgId);
+        dataForm.put(API.STORAGE_ID,                storage.getOrganizationId());
+        dataForm.put(API.STORAGE_NAME,          storage.getName().trim());
         dataForm.put(API.REQUEST,                   request);
         params.put(API.PARAMS_HANDLER_DATA,         dataForm);
         return params;

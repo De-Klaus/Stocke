@@ -46,16 +46,16 @@ public class StatisticUtil {
     private static String getOrgName(String field) {
         JSONObject jsonField = new JSONObject(field);
 
-        if(jsonField.has(API.COAL_STORAGE_NAME)){
-            String coalstorage_name = jsonField.optString(API.COAL_STORAGE_NAME);
-            if (!Validator.isBlank(coalstorage_name))
-                return coalstorage_name;
+        if(jsonField.has(API.STORAGE_NAME)){
+            String storage_name = jsonField.optString(API.STORAGE_NAME);
+            if (!Validator.isBlank(storage_name))
+                return storage_name;
         }
 
         else if(jsonField.has(API.ORG)){
-            String coalstorage_name = jsonField.optString(API.ORG);
-            if (!Validator.isBlank(coalstorage_name))
-                return coalstorage_name;
+            String storage_name = jsonField.optString(API.ORG);
+            if (!Validator.isBlank(storage_name))
+                return storage_name;
         }
         return StringPool.BLANK;
     }

@@ -24,12 +24,12 @@ import java.util.Map;
 @Component(
         immediate = true,
         property = {
-                "com.liferay.portlet.display-category=Угольная продукция",
+                "com.liferay.portlet.display-category=Продукция",
                 "com.liferay.portlet.header-portlet-css=/css/main.css",
                 "com.liferay.portlet.header-portlet-javascript=/js/main.js",
                 "com.liferay.portlet.header-portlet-javascript=/js/jquery.inputmask.bundle.min.js?js_fast_load=0",
                 "com.liferay.portlet.instanceable=true",
-                "javax.portlet.display-name=Выдача угольной продукции",
+                "javax.portlet.display-name=Выдача продукции",
                 "javax.portlet.init-param.template-path=/",
                 "javax.portlet.init-param.view-template=/jsp/delivery/view.jsp",
                 "javax.portlet.name=" + WebKeys.DELIVERY_NAME,

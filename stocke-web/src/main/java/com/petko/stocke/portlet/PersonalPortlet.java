@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 @Component(
         immediate = true,
         property = {
-                "com.liferay.portlet.display-category=Угольная продукция",
+                "com.liferay.portlet.display-category=Продукция",
                 "com.liferay.portlet.header-portlet-css=/css/main.css",
                 "com.liferay.portlet.header-portlet-javascript=/js/main.js",
                 "com.liferay.portlet.header-portlet-javascript=/js/jquery.inputmask.bundle.min.js?js_fast_load=0",
