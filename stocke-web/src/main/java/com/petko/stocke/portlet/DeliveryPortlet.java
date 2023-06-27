@@ -18,7 +18,7 @@ import java.util.Map;
 
 
 /**
- * @author PetkoN
+ * @author Petko
  *
  */
 @Component(

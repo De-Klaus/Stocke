@@ -16,7 +16,7 @@ public class DeliveryApplicationService {
      * Receiving all requests for issuance from the warehouse
      * @return
      */
-    public static List<CaseApplication> getDeliveryApplications() {
+    public List<CaseApplication> getDeliveryApplications() {
         List<CaseApplication> apList = new ArrayList<>();
         addApplicationStock(apList);
         log.debug("addApplicationStock: "+apList.size());

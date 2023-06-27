@@ -60,9 +60,7 @@ public interface Keys {
         String PARAMS_HANDLER_REPOSITORY_ID = "params_handler_repository";
 
     }
-    interface ApiValue {
-        String WARNING = "warning";
-    }
+
     interface STATUS {
         String PRODUCTS_DELIVERED = "Продукция доставлена";
     }

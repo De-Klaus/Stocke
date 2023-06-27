@@ -51,33 +51,17 @@ public class FilterUtil {
             storages.forEach(storage ->{
                 if (dataForm.has(Keys.API.STORAGE_NAME)) {
                     String storage_name = dataForm.optString(Keys.API.STORAGE_NAME);
-                    String orgId = getOrgId(storage_name);
-                    if(!Validator.isBlank(storage_name)&&storage.equals(orgId))
+                    if(!Validator.isBlank(storage_name)&&storage.equals(storage_name))
                         result.set(true);
                 }
                 if(dataForm.has(Keys.API.ORG)) {
                     String storage_name = dataForm.optString(Keys.API.ORG);
-                    String orgId = getOrgId(storage_name);
-                    if (!Validator.isBlank(storage_name) && storage.equals(orgId))
+                    if (!Validator.isBlank(storage_name) && storage.equals(storage_name))
                         result.set(true);
                 }
             });
             return result.get();
         }
         return false;
-    }
-
-    /**
-     * Getting organization id by name
-     * @param orgName
-     * @return
-     */
-    private static String getOrgId(String orgName) {
-        Optional<String> orgId = OrganizationLocalServiceUtil.getOrganizations(-1,-1).stream()
-                .filter(org -> org.getName().equals(orgName))
-                .map(Organization::getOrganizationId)
-                .map(longOrgId -> String.valueOf(longOrgId))
-                .findFirst();
-        return orgId.isPresent() ? orgId.get() : null;
     }
 }

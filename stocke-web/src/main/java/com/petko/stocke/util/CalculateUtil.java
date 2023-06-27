@@ -11,13 +11,16 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 public class CalculateUtil {
+
+    private DeliveryApplicationService deliveryApplicationService;
+
+    public CalculateUtil(DeliveryApplicationService deliveryApplicationService) {
+        this.deliveryApplicationService = deliveryApplicationService;
+    }
 
     /**
      * Summation of output
@@ -26,7 +29,8 @@ public class CalculateUtil {
      * @return
      */
     public static BigDecimal countBalanceProduct(double addLimit, JSONObject dataForm) {
-        BigDecimal remainder = BigDecimal.valueOf(dataForm.optDouble("balance"));
+        double balance = dataForm.has("balance") ? dataForm.optDouble("balance") : 0.0;
+        BigDecimal remainder = BigDecimal.valueOf(balance);
         BigDecimal requestRemainder = BigDecimal.valueOf(addLimit);
         BigDecimal balanceNew = remainder.add(requestRemainder);
         return balanceNew;
@@ -34,13 +38,14 @@ public class CalculateUtil {
 
     /**
      * Issuance calculation
-     * @param addLimit
+     * @param subtractLimit
      * @param dataForm
      * @return
      */
-    public static BigDecimal countProduceProduct(double addLimit, JSONObject dataForm) {
-        BigDecimal remainder = BigDecimal.valueOf(dataForm.optDouble("remainder"));
-        BigDecimal requestRemainder = BigDecimal.valueOf(addLimit);
+    public static BigDecimal countProduceProduct(double subtractLimit, JSONObject dataForm) {
+        double remainderJson = dataForm.has("remainder") ? dataForm.optDouble("remainder") : 0.0;
+        BigDecimal remainder = BigDecimal.valueOf(remainderJson);
+        BigDecimal requestRemainder = BigDecimal.valueOf(subtractLimit);
         BigDecimal remainderNew = remainder.subtract(requestRemainder);
         remainderNew = remainderNew.setScale(3, RoundingMode.HALF_UP);
         return remainderNew;
@@ -52,10 +57,10 @@ public class CalculateUtil {
      * @return
      */
     public static BigDecimal getLimitDecimal(HumanDto humanEntity){
-        BigDecimal square = BigDecimal.valueOf(humanEntity.getSquare()!=0?humanEntity.getSquare():1);
+        BigDecimal square = BigDecimal.valueOf(humanEntity.getSquare()!=0 ? humanEntity.getSquare():1);
         BigDecimal coefficient = BigDecimal.valueOf(humanEntity.getCoefficient()!=0?humanEntity.getCoefficient():1);
         // Calculation of the allocated limit production
-        return square.multiply(coefficient).setScale(3, RoundingMode.HALF_UP);// Выделенный лимит продукции
+        return square.multiply(coefficient).setScale(3, RoundingMode.HALF_UP);// Dedicated production limit
     }
 
     /**
@@ -73,14 +78,14 @@ public class CalculateUtil {
      * @param filters
      * @return Amount of issued (in tons)
      */
-    public static String getAmount(Map<String, Object> filters) {
+    public String getAmount(Map<String, Object> filters) {
         // filter data
         String date_start = GetterUtil.getString(filters.get("filter_date_start"), StringPool.BLANK);
         String date_end = GetterUtil.getString(filters.get("filter_date_end"), StringPool.BLANK);
         List<String> storages = Arrays.asList((String[]) filters.get("filter_storage"));
 
         // receiving all applications and filtering them by date and organizations
-        Optional<BigDecimal> resultCount = DeliveryApplicationService.getDeliveryApplications()
+        Optional<BigDecimal> resultCount = deliveryApplicationService.getDeliveryApplications()
                 .stream()
                 // filter by date
                 .filter(application ->
@@ -89,7 +94,7 @@ public class CalculateUtil {
                 .filter(application ->
                         FilterUtil.filterOrgName(storages,application))
                 .map(application ->
-                        getValues(application)
+                        JsonFieldUtil.getValues(application)
                 )
                 .reduce((a, b) -> a.add(b));
         log.debug("sum: "+resultCount);
@@ -99,17 +104,5 @@ public class CalculateUtil {
                 : "0.0";
     }
 
-    /**
-     * Retrieving All Output Values
-     * @param application
-     * @return
-     */
-    private static BigDecimal getValues(CaseApplication application) {
-        JSONObject dataForm = new JSONObject(application.getAdditionalFields());
-        if (dataForm.has(Keys.API.REQUEST))
-            return BigDecimal.valueOf(dataForm.getDouble(Keys.API.REQUEST));
-        if (dataForm.has(Keys.API.PURCHASE_DESIRED))
-            return BigDecimal.valueOf(dataForm.getDouble(Keys.API.PURCHASE_DESIRED));
-        return BigDecimal.ZERO;
-    }
+
 }

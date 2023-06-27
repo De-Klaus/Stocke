@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * <p>Содержит форматы для вывода/парсинга дат</p>
  *
- * @author PetkoN
+ * @author Petko
  */
 @Slf4j
 public class DateFormatUtil {

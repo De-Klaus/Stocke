@@ -26,7 +26,8 @@ public class StatisticUtil {
      * @return
      */
     public static List<OrgPurchaseDto> getAllStorageNames() {
-        List<CaseApplication> applications = DeliveryApplicationService.getDeliveryApplications();
+        DeliveryApplicationService deliveryApplicationService = new DeliveryApplicationService();
+        List<CaseApplication> applications = deliveryApplicationService.getDeliveryApplications();
         return applications.stream().map(CaseApplication::getAdditionalFields)
                 .map(field->
                         getOrgName(field))

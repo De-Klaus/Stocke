@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 /**
- * @author PetkoN
+ * @author Petko
  *
  */
 @Component(

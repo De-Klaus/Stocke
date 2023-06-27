@@ -11,8 +11,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/META-INF/resources/jsp/init.jsp" %>
 
-<%Log log = LogFactoryUtil.getLog("/META-INF/resources/jsp/delivery/view.jsp");%>
-
 <%
     long humanId=0;
     HttpServletRequest httpReq = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
