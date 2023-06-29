@@ -4,6 +4,7 @@
 <%@ page import="javax.portlet.MutableRenderParameters" %>
 <%@ page import="com.petko.stocke.dto.OrgPurchaseDto" %>
 <%@ page import="com.petko.stocke.util.CalculateUtil" %>
+<%@ page import="com.petko.stocke.service.DeliveryApplicationService" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/META-INF/resources/jsp/init.jsp" %>
 
@@ -16,6 +17,8 @@
 		themeDisplay.getPlid(), portletDisplay.getId(), PortletRequest.RENDER_PHASE, false);
 
     String[] filterStorage = ParamUtil.getStringValues(request, "filter_storage");
+    DeliveryApplicationService deliveryApplicationService = new DeliveryApplicationService();
+    CalculateUtil calculateUtil = new CalculateUtil(deliveryApplicationService);
 %>
 
 <H2>Статистика по выданной продукции</H2>
@@ -128,4 +131,4 @@
 <div></div>
 
 
-Выдано <%= CalculateUtil.getAmount(filters) %> тонн
+Выдано <%= calculateUtil.getAmount(filters) %> тонн

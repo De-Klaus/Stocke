@@ -1,0 +1,25 @@
+Bundle-Name: stocke-web
+Bundle-SymbolicName: com.petko.stocke.web
+Bundle-Description: Веб-модуль для CP
+Bundle-Version: 1.0.0
+-contract: JavaPortlet,JavaServlet
+-includeresource: libraries/=lib/;lib:=true
+-jsp: *.jsp,*.jspf
+-metatype: *
+-plugin.metatype: com.liferay.ant.bnd.metatype.MetatypePlugin
+-sass: *
+-sources: true
+-fixupmessages "Classes found in the wrong directory"; restrict:=error; is:=warning
+Web-ContextPath: /stocke-web
+Export-Package:\ com.petko.stocke.util
+Import-Package:\
+    com.liferay.*,\
+    !org.objectweb.asm.*,\
+    !sun.nio.ch.*,\
+    !javax.annotation.*,\
+    !com.beust.jcommander.*,\
+    !com.itextpdf.kernel.*,\
+    !com.google.zxing.*,\
+	!com.fasterxml.jackson.*,\
+	javax.*,\
+	*
